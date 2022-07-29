@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<windows.h>
 #define MAP_Length 10//マップの大きさ
 #define X 1
 #define Y 0
@@ -19,14 +20,23 @@ int MAP[10][10] = {{1,2,1,0,1,0,1,1,1,1},
                    {1,1,1,1,1,1,1,0,1,0},
                    {0,1,0,1,0,0,0,0,1,3}};
 int PlayerTrans[2] = {0,1};//プレイヤーの位置を表す（y,x）
+int GoalTrans[2] = {9,9};//ゴールの位置を表す
 int main(void){
     char input;
     while(1){
         MAP_print();//マップの描画
+        if(PlayerTrans[X] == GoalTrans[X] && PlayerTrans[Y] == GoalTrans[Y]){
+            printf("ゴールしました！");
+            break;
+        }
         scanf(" %c",&input);
-        if(input == 'q')break;
+        if(input == 'q'){
+            printf("ゲームを終了します。");
+            break;
+        }
         Player_Move(input);
     }
+    Sleep(3000);
     return 0;
 }
 
